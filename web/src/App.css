@@ -46,6 +46,7 @@ body {
 }
 
 .SQLDebug-block {
+  position: relative;
   margin-bottom: 20px;
 }
 
@@ -124,4 +125,30 @@ body {
   height: 25px;
   background: #4CAF50;
   cursor: pointer;
+}
+
+.SQLDebug-tooltip {
+  visibility: hidden;
+  position: absolute;
+  background-color:#ccc;
+  top: 10px;
+  left: 20px;
+  border: 1px solid #eee;
+  padding: 10px;
+  border-radius: 8px;
+  z-index: 1;
+}
+
+.SQLDebug-block:hover .SQLDebug-tooltip {
+  visibility:visible;
+}
+
+a.SQLDebug-expand-icon {
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.SQLDebug code {
+  font-size: 12px;
 }
