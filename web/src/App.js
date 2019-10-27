@@ -9,7 +9,11 @@ import SQLFuzz from './SQLFuzz'
 import SQLDebug2 from './SQLDebug_2'
 
 function App() {
-  const [curKey, setCurKey] = useState('home')
+  let pathname = window.location.pathname.slice(1);
+  if(pathname === '') {
+    pathname = 'home'
+  }
+  const [curKey, setCurKey] = useState(pathname)
   const handleClick = e => {
     setCurKey(e.key)
   }
@@ -20,11 +24,11 @@ function App() {
           <Link to="/">HOME</Link>
         </Menu.Item>
 
-        <Menu.Item key="fuzz">
+        <Menu.Item key="sqlfuzz">
           <Link to="/sqlfuzz">SQL_FUZZ</Link>
         </Menu.Item>
 
-        <Menu.Item key="debug">
+        <Menu.Item key="sqldebug_2">
           <Link to="/sqldebug_2">SQL_DEBUG</Link>
         </Menu.Item>
       </Menu>
