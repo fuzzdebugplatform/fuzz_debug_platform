@@ -127,7 +127,8 @@ function SQLDebug2() {
     return range(block.endLine + 1, end)
   }
 
-  function handleExpand(filePath) {
+  function handleExpand(e, filePath) {
+    e.preventDefault()
     setExpands(prevState => ({
       ...prevState,
       [filePath]: !!!prevState[filePath]
@@ -160,8 +161,9 @@ function SQLDebug2() {
         <div className="SQLDebug-file" key={file.filePath}>
           <span>{file.filePath}</span>
           <a
+            href="/"
             className="SQLDebug-expand-icon"
-            onClick={() => handleExpand(file.filePath)}
+            onClick={e => handleExpand(e, file.filePath)}
           >
             {expands[file.filePath] === true ? ' 折叠' : ' 展开'}
           </a>
