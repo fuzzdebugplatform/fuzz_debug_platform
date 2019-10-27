@@ -1,0 +1,52 @@
+[
+  {
+    "filePath": "servers/server1.go",
+    "codeBlock": {
+      "startLine": 10,
+      "endLine": 12,
+      "content": "        <Route exact path=\"/\">\n          <Home/>\n        </Route>"
+    },
+    "score": 0.8,
+    "count": 25
+  },
+  {
+    "filePath": "servers/server2.go",
+    "codeBlock": {
+      "startLine": 10,
+      "endLine": 12,
+      "content": "        <Route exact path=\"/\">\n          <Home/>\n        </Route>"
+    },
+    "score": 0.7,
+    "count": 50
+  },
+  {
+    "filePath": "servers/server3.go",
+    "codeBlock": {
+      "startLine": 10,
+      "endLine": 12,
+      "content": "        <Route exact path=\"/\">\n          <Home/>\n        </Route>"
+    },
+    "score": 0.5,
+    "count": 10
+  },
+  {
+    "filePath": "servers/server4.go",
+    "codeBlock": {
+      "startLine": 10,
+      "endLine": 12,
+      "content": "        <Route exact path=\"/\">\n          <Home/>\n        </Route>"
+    },
+    "score": 0.9,
+    "count": 5
+  },
+  {
+    "filePath": "servers/server5.go",
+    "codeBlock": {
+      "startLine": 10,
+      "endLine": 12,
+      "content": "        <Route exact path=\"/\">\n          <Home/>\n        </Route>"
+    },
+    "score": 0.1,
+    "count": 1
+  }
+]

@@ -1,0 +1,284 @@
+[
+  {
+    "number": 16,
+    "alter": 5,
+    "heat": 42,
+    "sql": "SELECT NTILE(91) OVER w1 AS 'ntile', fieldA, fieldB FROM ( SELECT `col_bigint_key_unsigned` AS fieldA, `col_char(20)_undef_signed` AS fieldB FROM table_90_utf8_6 ORDER BY LOWER(fieldA), LOWER(fieldB) ) as t WINDOW w1 AS (PARTITION BY LOWER(fieldB) ORDER BY LOWER(fieldA) DESC , LOWER(fieldB) ASC RANGE CURRENT ROW)"
+  },
+  {
+    "number": 4,
+    "alter": 0,
+    "heat": 497,
+    "sql": "SELECT NTILE(91) OVER w1 AS 'ntile', fieldA, fieldB FROM ( SELECT `col_bigint_key_unsigned` AS fieldA, `col_char(20)_undef_signed` AS fieldB FROM table_90_utf8_6 ORDER BY LOWER(fieldA), LOWER(fieldB) ) as t WINDOW w1 AS (PARTITION BY LOWER(fieldB) ORDER BY LOWER(fieldA) DESC , LOWER(fieldB) ASC RANGE CURRENT ROW)"
+  },
+  {
+    "number": 15,
+    "alter": 1,
+    "heat": 198,
+    "sql": "SELECT NTILE(91) OVER w1 AS 'ntile', fieldA, fieldB FROM ( SELECT `col_bigint_key_unsigned` AS fieldA, `col_char(20)_undef_signed` AS fieldB FROM table_90_utf8_6 ORDER BY LOWER(fieldA), LOWER(fieldB) ) as t WINDOW w1 AS (PARTITION BY LOWER(fieldB) ORDER BY LOWER(fieldA) DESC , LOWER(fieldB) ASC RANGE CURRENT ROW)"
+  },
+  {
+    "number": 2,
+    "alter": 7,
+    "heat": 3,
+    "sql": "SELECT NTILE(91) OVER w1 AS 'ntile', fieldA, fieldB FROM ( SELECT `col_bigint_key_unsigned` AS fieldA, `col_char(20)_undef_signed` AS fieldB FROM table_90_utf8_6 ORDER BY LOWER(fieldA), LOWER(fieldB) ) as t WINDOW w1 AS (PARTITION BY LOWER(fieldB) ORDER BY LOWER(fieldA) DESC , LOWER(fieldB) ASC RANGE CURRENT ROW)"
+  },
+  {
+    "number": 6,
+    "alter": 0,
+    "heat": 398,
+    "sql": "SELECT NTILE(91) OVER w1 AS 'ntile', fieldA, fieldB FROM ( SELECT `col_bigint_key_unsigned` AS fieldA, `col_char(20)_undef_signed` AS fieldB FROM table_90_utf8_6 ORDER BY LOWER(fieldA), LOWER(fieldB) ) as t WINDOW w1 AS (PARTITION BY LOWER(fieldB) ORDER BY LOWER(fieldA) DESC , LOWER(fieldB) ASC RANGE CURRENT ROW)"
+  },
+  {
+    "number": 8,
+    "alter": 1,
+    "heat": 405,
+    "sql": "SELECT NTILE(91) OVER w1 AS 'ntile', fieldA, fieldB FROM ( SELECT `col_bigint_key_unsigned` AS fieldA, `col_char(20)_undef_signed` AS fieldB FROM table_90_utf8_6 ORDER BY LOWER(fieldA), LOWER(fieldB) ) as t WINDOW w1 AS (PARTITION BY LOWER(fieldB) ORDER BY LOWER(fieldA) DESC , LOWER(fieldB) ASC RANGE CURRENT ROW)"
+  },
+  {
+    "number": 8,
+    "alter": 0,
+    "heat": 391,
+    "sql": "SELECT NTILE(91) OVER w1 AS 'ntile', fieldA, fieldB FROM ( SELECT `col_bigint_key_unsigned` AS fieldA, `col_char(20)_undef_signed` AS fieldB FROM table_90_utf8_6 ORDER BY LOWER(fieldA), LOWER(fieldB) ) as t WINDOW w1 AS (PARTITION BY LOWER(fieldB) ORDER BY LOWER(fieldA) DESC , LOWER(fieldB) ASC RANGE CURRENT ROW)"
+  },
+  {
+    "number": 10,
+    "alter": 1,
+    "heat": 194,
+    "sql": "SELECT NTILE(91) OVER w1 AS 'ntile', fieldA, fieldB FROM ( SELECT `col_bigint_key_unsigned` AS fieldA, `col_char(20)_undef_signed` AS fieldB FROM table_90_utf8_6 ORDER BY LOWER(fieldA), LOWER(fieldB) ) as t WINDOW w1 AS (PARTITION BY LOWER(fieldB) ORDER BY LOWER(fieldA) DESC , LOWER(fieldB) ASC RANGE CURRENT ROW)"
+  },
+  {
+    "number": 13,
+    "alter": 0,
+    "heat": 114,
+    "sql": "SELECT NTILE(91) OVER w1 AS 'ntile', fieldA, fieldB FROM ( SELECT `col_bigint_key_unsigned` AS fieldA, `col_char(20)_undef_signed` AS fieldB FROM table_90_utf8_6 ORDER BY LOWER(fieldA), LOWER(fieldB) ) as t WINDOW w1 AS (PARTITION BY LOWER(fieldB) ORDER BY LOWER(fieldA) DESC , LOWER(fieldB) ASC RANGE CURRENT ROW)"
+  },
+  {
+    "number": 16,
+    "alter": 3,
+    "heat": 43,
+    "sql": "SELECT NTH_VALUE(fieldA, 2)  OVER w1 AS 'nth_value', fieldA, fieldB FROM ( SELECT `col_double_key_unsigned` AS fieldA, `col_decimal(40, 20)_key_signed` AS fieldB FROM table_30_binary_undef ORDER BY LOWER(fieldA), LOWER(fieldB) ) as t WINDOW w1 AS (PARTITION BY LOWER(fieldB) ORDER BY LOWER(fieldA) ASC , LOWER(fieldB) ASC RANGE CURRENT ROW)"
+  },
+  {
+    "number": 17,
+    "alter": 2,
+    "heat": 21,
+    "sql": "SELECT NTH_VALUE(fieldA, 2)  OVER w1 AS 'nth_value', fieldA, fieldB FROM ( SELECT `col_double_key_unsigned` AS fieldA, `col_decimal(40, 20)_key_signed` AS fieldB FROM table_30_binary_undef ORDER BY LOWER(fieldA), LOWER(fieldB) ) as t WINDOW w1 AS (PARTITION BY LOWER(fieldB) ORDER BY LOWER(fieldA) ASC , LOWER(fieldB) ASC RANGE CURRENT ROW)"
+  },
+  {
+    "number": 17,
+    "alter": 1,
+    "heat": 24,
+    "sql": "SELECT FIRST_VALUE(fieldA) IGNORE NULLS OVER w1 AS 'first_value', fieldA, fieldB FROM ( SELECT `col_bigint_undef_unsigned` AS fieldA, `col_decimal(40, 20)_undef_signed` AS fieldB FROM table_20_binary_4 ORDER BY LOWER(fieldA), LOWER(fieldB) ) as t WINDOW w1 AS (PARTITION BY LOWER(fieldB) ORDER BY LOWER(fieldB) ASC , LOWER(fieldA) DESC RANGE CURRENT ROW)"
+  },
+  {
+    "number": 2,
+    "alter": 2,
+    "heat": 5,
+    "sql": "SELECT FIRST_VALUE(fieldA) IGNORE NULLS OVER w1 AS 'first_value', fieldA, fieldB FROM ( SELECT `col_bigint_undef_unsigned` AS fieldA, `col_decimal(40, 20)_undef_signed` AS fieldB FROM table_20_binary_4 ORDER BY LOWER(fieldA), LOWER(fieldB) ) as t WINDOW w1 AS (PARTITION BY LOWER(fieldB) ORDER BY LOWER(fieldB) ASC , LOWER(fieldA) DESC RANGE CURRENT ROW)"
+  },
+  {
+    "number": 2,
+    "alter": 9,
+    "heat": 33,
+    "sql": "SELECT RANK() OVER w1 AS 'rank', fieldA, fieldB FROM ( SELECT `col_decimal(40, 20)_key_unsigned` AS fieldA, `col_char(20)_key_signed` AS fieldB FROM table_20_latin1_6 ORDER BY LOWER(fieldA), LOWER(fieldB) ) as t WINDOW w1 AS (PARTITION BY LOWER(fieldB) ORDER BY LOWER(fieldB) DESC , LOWER(fieldA) DESC ROWS 91 PRECEDING)"
+  },
+  {
+    "number": 10,
+    "alter": 0,
+    "heat": 203,
+    "sql": "SELECT RANK() OVER w1 AS 'rank', fieldA, fieldB FROM ( SELECT `col_decimal(40, 20)_key_unsigned` AS fieldA, `col_char(20)_key_signed` AS fieldB FROM table_20_latin1_6 ORDER BY LOWER(fieldA), LOWER(fieldB) ) as t WINDOW w1 AS (PARTITION BY LOWER(fieldB) ORDER BY LOWER(fieldB) DESC , LOWER(fieldA) DESC ROWS 91 PRECEDING)"
+  },
+  {
+    "number": 7,
+    "alter": 1,
+    "heat": 58,
+    "sql": "SELECT RANK() OVER (PARTITION BY LOWER(fieldB) ORDER BY LOWER(fieldB) DESC , LOWER(fieldA) ASC RANGE BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW) AS 'rank', fieldA, fieldB FROM ( SELECT `col_double_key_unsigned` AS fieldA, `col_decimal(40, 20)_key_unsigned` AS fieldB FROM table_90_utf8_6 ORDER BY LOWER(fieldA), LOWER(fieldB) ) as t WINDOW w1 AS (PARTITION BY LOWER(fieldB) ORDER BY LOWER(fieldB) ASC , LOWER(fieldA) ASC RANGE UNBOUNDED PRECEDING)"
+  },
+  {
+    "number": 13,
+    "alter": 1,
+    "heat": 117,
+    "sql": "SELECT RANK() OVER (PARTITION BY LOWER(fieldB) ORDER BY LOWER(fieldB) DESC , LOWER(fieldA) ASC RANGE BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW) AS 'rank', fieldA, fieldB FROM ( SELECT `col_double_key_unsigned` AS fieldA, `col_decimal(40, 20)_key_unsigned` AS fieldB FROM table_90_utf8_6 ORDER BY LOWER(fieldA), LOWER(fieldB) ) as t WINDOW w1 AS (PARTITION BY LOWER(fieldB) ORDER BY LOWER(fieldB) ASC , LOWER(fieldA) ASC RANGE UNBOUNDED PRECEDING)"
+  },
+  {
+    "number": 14,
+    "alter": 0,
+    "heat": 51,
+    "sql": "SELECT RANK() OVER (PARTITION BY LOWER(fieldB) ORDER BY LOWER(fieldB) DESC , LOWER(fieldA) ASC RANGE BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW) AS 'rank', fieldA, fieldB FROM ( SELECT `col_double_key_unsigned` AS fieldA, `col_decimal(40, 20)_key_unsigned` AS fieldB FROM table_90_utf8_6 ORDER BY LOWER(fieldA), LOWER(fieldB) ) as t WINDOW w1 AS (PARTITION BY LOWER(fieldB) ORDER BY LOWER(fieldB) ASC , LOWER(fieldA) ASC RANGE UNBOUNDED PRECEDING)"
+  },
+  {
+    "number": 12,
+    "alter": 0,
+    "heat": 14,
+    "sql": "SELECT RANK() OVER (PARTITION BY LOWER(fieldB) ORDER BY LOWER(fieldB) DESC , LOWER(fieldA) ASC RANGE BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW) AS 'rank', fieldA, fieldB FROM ( SELECT `col_double_key_unsigned` AS fieldA, `col_decimal(40, 20)_key_unsigned` AS fieldB FROM table_90_utf8_6 ORDER BY LOWER(fieldA), LOWER(fieldB) ) as t WINDOW w1 AS (PARTITION BY LOWER(fieldB) ORDER BY LOWER(fieldB) ASC , LOWER(fieldA) ASC RANGE UNBOUNDED PRECEDING)"
+  },
+  {
+    "number": 11,
+    "alter": 1,
+    "heat": 14,
+    "sql": "SELECT RANK() OVER (PARTITION BY LOWER(fieldB) ORDER BY LOWER(fieldB) DESC , LOWER(fieldA) ASC RANGE BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW) AS 'rank', fieldA, fieldB FROM ( SELECT `col_double_key_unsigned` AS fieldA, `col_decimal(40, 20)_key_unsigned` AS fieldB FROM table_90_utf8_6 ORDER BY LOWER(fieldA), LOWER(fieldB) ) as t WINDOW w1 AS (PARTITION BY LOWER(fieldB) ORDER BY LOWER(fieldB) ASC , LOWER(fieldA) ASC RANGE UNBOUNDED PRECEDING)"
+  },
+  {
+    "number": 11,
+    "alter": 0,
+    "heat": 62,
+    "sql": "SELECT RANK() OVER (PARTITION BY LOWER(fieldB) ORDER BY LOWER(fieldB) DESC , LOWER(fieldA) ASC RANGE BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW) AS 'rank', fieldA, fieldB FROM ( SELECT `col_double_key_unsigned` AS fieldA, `col_decimal(40, 20)_key_unsigned` AS fieldB FROM table_90_utf8_6 ORDER BY LOWER(fieldA), LOWER(fieldB) ) as t WINDOW w1 AS (PARTITION BY LOWER(fieldB) ORDER BY LOWER(fieldB) ASC , LOWER(fieldA) ASC RANGE UNBOUNDED PRECEDING)"
+  },
+  {
+    "number": 5,
+    "alter": 1,
+    "heat": 5,
+    "sql": "SELECT RANK() OVER (PARTITION BY LOWER(fieldB) ORDER BY LOWER(fieldB) DESC , LOWER(fieldA) ASC RANGE BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW) AS 'rank', fieldA, fieldB FROM ( SELECT `col_double_key_unsigned` AS fieldA, `col_decimal(40, 20)_key_unsigned` AS fieldB FROM table_90_utf8_6 ORDER BY LOWER(fieldA), LOWER(fieldB) ) as t WINDOW w1 AS (PARTITION BY LOWER(fieldB) ORDER BY LOWER(fieldB) ASC , LOWER(fieldA) ASC RANGE UNBOUNDED PRECEDING)"
+  },
+  {
+    "number": 2,
+    "alter": 10,
+    "heat": 30,
+    "sql": "SELECT ROW_NUMBER() OVER w1 AS 'row_number', fieldA, fieldB FROM ( SELECT `col_decimal(40, 20)_undef_signed` AS fieldA, `col_char(20)_undef_signed` AS fieldB FROM table_20_binary_undef ORDER BY LOWER(fieldA), LOWER(fieldB) ) as t WINDOW w1 AS (PARTITION BY LOWER(fieldB) ORDER BY LOWER(fieldB) DESC , LOWER(fieldA) DESC ROWS BETWEEN UNBOUNDED PRECEDING AND UNBOUNDED FOLLOWING)"
+  },
+  {
+    "number": 14,
+    "alter": 3,
+    "heat": 54,
+    "sql": "SELECT ROW_NUMBER() OVER w1 AS 'row_number', fieldA, fieldB FROM ( SELECT `col_decimal(40, 20)_undef_signed` AS fieldA, `col_char(20)_undef_signed` AS fieldB FROM table_20_binary_undef ORDER BY LOWER(fieldA), LOWER(fieldB) ) as t WINDOW w1 AS (PARTITION BY LOWER(fieldB) ORDER BY LOWER(fieldB) DESC , LOWER(fieldA) DESC ROWS BETWEEN UNBOUNDED PRECEDING AND UNBOUNDED FOLLOWING)"
+  },
+  {
+    "number": 7,
+    "alter": 0,
+    "heat": 46,
+    "sql": "SELECT RANK() OVER w1 AS 'rank', fieldA, fieldB FROM ( SELECT `col_bigint_undef_signed` AS fieldA, `col_bigint_key_unsigned` AS fieldB FROM table_30_binary_6 ORDER BY LOWER(fieldA), LOWER(fieldB) ) as t WINDOW w1 AS (PARTITION BY LOWER(fieldB) ORDER BY LOWER(fieldA) DESC , LOWER(fieldB) DESC ROWS BETWEEN UNBOUNDED PRECEDING AND UNBOUNDED PRECEDING)"
+  },
+  {
+    "number": 14,
+    "alter": 1,
+    "heat": 37,
+    "sql": "SELECT RANK() OVER w1 AS 'rank', fieldA, fieldB FROM ( SELECT `col_bigint_undef_signed` AS fieldA, `col_bigint_key_unsigned` AS fieldB FROM table_30_binary_6 ORDER BY LOWER(fieldA), LOWER(fieldB) ) as t WINDOW w1 AS (PARTITION BY LOWER(fieldB) ORDER BY LOWER(fieldA) DESC , LOWER(fieldB) DESC ROWS BETWEEN UNBOUNDED PRECEDING AND UNBOUNDED PRECEDING)"
+  },
+  {
+    "number": 13,
+    "alter": 3,
+    "heat": 46,
+    "sql": "SELECT RANK() OVER w1 AS 'rank', fieldA, fieldB FROM ( SELECT `col_varchar(20)_key_signed` AS fieldA, `col_bigint_undef_signed` AS fieldB FROM table_10_utf8_4 ORDER BY LOWER(fieldA), LOWER(fieldB) ) as t WINDOW w1 AS (PARTITION BY LOWER(fieldB) ORDER BY LOWER(fieldB) ASC , LOWER(fieldA) ASC RANGE BETWEEN UNBOUNDED FOLLOWING AND UNBOUNDED FOLLOWING)"
+  },
+  {
+    "number": 2,
+    "alter": 1,
+    "heat": 21,
+    "sql": "SELECT DENSE_RANK() OVER w1 AS 'dense_rank', fieldA, fieldB FROM ( SELECT `col_decimal(40, 20)_key_signed` AS fieldA, `col_bigint_undef_signed` AS fieldB FROM table_10_latin1_6 ORDER BY LOWER(fieldA), LOWER(fieldB) ) as t WINDOW w1 AS (PARTITION BY LOWER(fieldB) ORDER BY LOWER(fieldB) DESC , LOWER(fieldA) ASC ROWS BETWEEN UNBOUNDED PRECEDING AND UNBOUNDED PRECEDING)"
+  },
+  {
+    "number": 15,
+    "alter": 0,
+    "heat": 2,
+    "sql": "SELECT ROW_NUMBER() OVER (PARTITION BY LOWER(fieldB) ORDER BY LOWER(fieldB) DESC , LOWER(fieldA) DESC RANGE CURRENT ROW) AS 'row_number', fieldA, fieldB FROM ( SELECT `col_bigint_key_signed` AS fieldA, `col_char(20)_undef_signed` AS fieldB FROM table_20_binary_6 ORDER BY LOWER(fieldA), LOWER(fieldB) ) as t WINDOW w1 AS (PARTITION BY LOWER(fieldB) ORDER BY LOWER(fieldA) DESC , LOWER(fieldB) DESC RANGE BETWEEN CURRENT ROW AND UNBOUNDED PRECEDING)"
+  },
+  {
+    "number": 14,
+    "alter": 4,
+    "heat": 11,
+    "sql": "SELECT DENSE_RANK() OVER w1 AS 'dense_rank', fieldA, fieldB FROM ( SELECT `col_bigint_undef_unsigned` AS fieldA, `col_double_key_unsigned` AS fieldB FROM table_20_utf8_undef ORDER BY LOWER(fieldA), LOWER(fieldB) ) as t WINDOW w1 AS (PARTITION BY LOWER(fieldB) ORDER BY LOWER(fieldA) ASC , LOWER(fieldB) DESC RANGE BETWEEN UNBOUNDED FOLLOWING AND 91 FOLLOWING)"
+  },
+  {
+    "number": 9,
+    "alter": 0,
+    "heat": 37,
+    "sql": "SELECT NTH_VALUE(fieldA, 2)  OVER (PARTITION BY LOWER(fieldB) ORDER BY LOWER(fieldA) ASC , LOWER(fieldB) DESC RANGE CURRENT ROW) AS 'nth_value', fieldA, fieldB FROM ( SELECT `col_float_key_signed` AS fieldA, `col_bigint_key_unsigned` AS fieldB FROM table_10_binary_undef ORDER BY LOWER(fieldA), LOWER(fieldB) ) as t WINDOW w1 AS (PARTITION BY LOWER(fieldB) ORDER BY LOWER(fieldB) ASC , LOWER(fieldA) ASC ROWS UNBOUNDED PRECEDING)"
+  },
+  {
+    "number": 5,
+    "alter": 0,
+    "heat": 5,
+    "sql": "SELECT NTH_VALUE(fieldA, 2)  OVER (PARTITION BY LOWER(fieldB) ORDER BY LOWER(fieldA) ASC , LOWER(fieldB) DESC RANGE CURRENT ROW) AS 'nth_value', fieldA, fieldB FROM ( SELECT `col_float_key_signed` AS fieldA, `col_bigint_key_unsigned` AS fieldB FROM table_10_binary_undef ORDER BY LOWER(fieldA), LOWER(fieldB) ) as t WINDOW w1 AS (PARTITION BY LOWER(fieldB) ORDER BY LOWER(fieldB) ASC , LOWER(fieldA) ASC ROWS UNBOUNDED PRECEDING)"
+  },
+  {
+    "number": 2,
+    "alter": 6,
+    "heat": 3,
+    "sql": "SELECT NTH_VALUE(fieldA, 91) IGNORE NULLS OVER w1 AS 'nth_value', fieldA, fieldB FROM ( SELECT `col_bigint_undef_unsigned` AS fieldA, `col_decimal(40, 20)_key_unsigned` AS fieldB FROM table_90_binary_6 ORDER BY LOWER(fieldA), LOWER(fieldB) ) as t WINDOW w1 AS (PARTITION BY LOWER(fieldB) ORDER BY LOWER(fieldA) DESC , LOWER(fieldB) ASC ROWS 0 PRECEDING)"
+  },
+  {
+    "number": 16,
+    "alter": 1,
+    "heat": 40,
+    "sql": "SELECT NTH_VALUE(fieldA, 91) IGNORE NULLS OVER w1 AS 'nth_value', fieldA, fieldB FROM ( SELECT `col_bigint_undef_unsigned` AS fieldA, `col_decimal(40, 20)_key_unsigned` AS fieldB FROM table_90_binary_6 ORDER BY LOWER(fieldA), LOWER(fieldB) ) as t WINDOW w1 AS (PARTITION BY LOWER(fieldB) ORDER BY LOWER(fieldA) DESC , LOWER(fieldB) ASC ROWS 0 PRECEDING)"
+  },
+  {
+    "number": 13,
+    "alter": 2,
+    "heat": 17,
+    "sql": "SELECT NTH_VALUE(fieldA, 91) IGNORE NULLS OVER w1 AS 'nth_value', fieldA, fieldB FROM ( SELECT `col_bigint_undef_unsigned` AS fieldA, `col_decimal(40, 20)_key_unsigned` AS fieldB FROM table_90_binary_6 ORDER BY LOWER(fieldA), LOWER(fieldB) ) as t WINDOW w1 AS (PARTITION BY LOWER(fieldB) ORDER BY LOWER(fieldA) DESC , LOWER(fieldB) ASC ROWS 0 PRECEDING)"
+  },
+  {
+    "number": 16,
+    "alter": 2,
+    "heat": 38,
+    "sql": "SELECT RANK() OVER w1 AS 'rank', fieldA, fieldB FROM ( SELECT `col_varchar(20)_key_signed` AS fieldA, `col_bigint_undef_unsigned` AS fieldB FROM table_20_binary_undef ORDER BY LOWER(fieldA), LOWER(fieldB) ) as t WINDOW w1 AS (PARTITION BY LOWER(fieldB) ORDER BY LOWER(fieldB) DESC , LOWER(fieldA) ASC RANGE 1 PRECEDING)"
+  },
+  {
+    "number": 2,
+    "alter": 0,
+    "heat": 18,
+    "sql": "SELECT CUME_DIST() OVER w1 AS 'cume_dist', fieldA, fieldB FROM ( SELECT `col_enum_key_signed` AS fieldA, `col_char(20)_undef_signed` AS fieldB FROM table_30_latin1_4 ORDER BY LOWER(fieldA), LOWER(fieldB) ) as t WINDOW w1 AS (PARTITION BY LOWER(fieldB) ORDER BY LOWER(fieldA) DESC , LOWER(fieldB) ASC ROWS BETWEEN UNBOUNDED FOLLOWING AND UNBOUNDED FOLLOWING)"
+  },
+  {
+    "number": 16,
+    "alter": 4,
+    "heat": 40,
+    "sql": "SELECT ROW_NUMBER() OVER (PARTITION BY LOWER(fieldB) ORDER BY LOWER(fieldB) ASC , LOWER(fieldA) ASC RANGE CURRENT ROW) AS 'row_number', fieldA, fieldB FROM ( SELECT `col_double_key_unsigned` AS fieldA, `col_double_key_unsigned` AS fieldB FROM table_30_utf8_4 ORDER BY LOWER(fieldA), LOWER(fieldB) ) as t WINDOW w1 AS (PARTITION BY LOWER(fieldB) ORDER BY LOWER(fieldB) DESC , LOWER(fieldA) DESC RANGE 11 PRECEDING)"
+  },
+  {
+    "number": 2,
+    "alter": 8,
+    "heat": 37,
+    "sql": "SELECT PERCENT_RANK() OVER w1 AS 'percent_rank', fieldA, fieldB FROM ( SELECT `col_double_undef_signed` AS fieldA, `col_char(20)_key_signed` AS fieldB FROM table_30_binary_undef ORDER BY LOWER(fieldA), LOWER(fieldB) ) as t WINDOW w1 AS (PARTITION BY LOWER(fieldB) ORDER BY LOWER(fieldB) DESC , LOWER(fieldA) ASC ROWS CURRENT ROW)"
+  },
+  {
+    "number": 16,
+    "alter": 6,
+    "heat": 39,
+    "sql": "SELECT ROW_NUMBER() OVER w1 AS 'row_number', fieldA, fieldB FROM ( SELECT `col_enum_key_signed` AS fieldA, `col_enum_key_signed` AS fieldB FROM table_90_latin1_6 ORDER BY LOWER(fieldA), LOWER(fieldB) ) as t WINDOW w1 AS (PARTITION BY LOWER(fieldB) ORDER BY LOWER(fieldB) DESC , LOWER(fieldA) DESC RANGE BETWEEN 1250951168 PRECEDING AND 91 FOLLOWING)"
+  },
+  {
+    "number": 1,
+    "alter": 0,
+    "heat": 10,
+    "sql": "SELECT PERCENT_RANK() OVER w1 AS 'percent_rank', fieldA, fieldB FROM ( SELECT `col_decimal(40, 20)_key_signed` AS fieldA, `col_float_undef_signed` AS fieldB FROM table_10_latin1_6 ORDER BY LOWER(fieldA), LOWER(fieldB) ) as t WINDOW w1 AS (PARTITION BY LOWER(fieldB) ORDER BY LOWER(fieldB) ASC , LOWER(fieldA) DESC ROWS 1 PRECEDING)"
+  },
+  {
+    "number": 0,
+    "alter": 0,
+    "heat": 10,
+    "sql": "SELECT PERCENT_RANK() OVER w1 AS 'percent_rank', fieldA, fieldB FROM ( SELECT `col_decimal(40, 20)_key_signed` AS fieldA, `col_float_undef_signed` AS fieldB FROM table_10_latin1_6 ORDER BY LOWER(fieldA), LOWER(fieldB) ) as t WINDOW w1 AS (PARTITION BY LOWER(fieldB) ORDER BY LOWER(fieldB) ASC , LOWER(fieldA) DESC ROWS 1 PRECEDING)"
+  },
+  {
+    "number": 14,
+    "alter": 2,
+    "heat": 11,
+    "sql": "SELECT CUME_DIST() OVER (PARTITION BY LOWER(fieldB) ORDER BY LOWER(fieldA) ASC , LOWER(fieldB) DESC ROWS BETWEEN UNBOUNDED PRECEDING AND 0 PRECEDING) AS 'cume_dist', fieldA, fieldB FROM ( SELECT `col_double_undef_unsigned` AS fieldA, `col_double_undef_signed` AS fieldB FROM table_20_utf8_6 ORDER BY LOWER(fieldA), LOWER(fieldB) ) as t WINDOW w1 AS (PARTITION BY LOWER(fieldB) ORDER BY LOWER(fieldA) DESC , LOWER(fieldB) DESC RANGE CURRENT ROW)"
+  },
+  {
+    "number": 17,
+    "alter": 0,
+    "heat": 18,
+    "sql": "SELECT LAST_VALUE(fieldA) RESPECT NULLS OVER w1 AS 'last_value', fieldA, fieldB FROM ( SELECT `col_double_key_signed` AS fieldA, `col_varchar(20)_undef_signed` AS fieldB FROM table_90_binary_4 ORDER BY LOWER(fieldA), LOWER(fieldB) ) as t WINDOW w1 AS (PARTITION BY LOWER(fieldB) ORDER BY LOWER(fieldA) ASC , LOWER(fieldB) ASC ROWS BETWEEN 1250951168 FOLLOWING AND UNBOUNDED FOLLOWING)"
+  },
+  {
+    "number": 13,
+    "alter": 4,
+    "heat": 9,
+    "sql": "SELECT NTH_VALUE(fieldA, 2) RESPECT NULLS OVER (PARTITION BY LOWER(fieldB) ORDER BY LOWER(fieldB) DESC , LOWER(fieldA) ASC ROWS 0 PRECEDING) AS 'nth_value', fieldA, fieldB FROM ( SELECT `col_bigint_undef_signed` AS fieldA, `col_float_key_unsigned` AS fieldB FROM table_90_latin1_6 ORDER BY LOWER(fieldA), LOWER(fieldB) ) as t WINDOW w1 AS (PARTITION BY LOWER(fieldB) ORDER BY LOWER(fieldB) ASC , LOWER(fieldA) DESC ROWS BETWEEN 11 FOLLOWING AND UNBOUNDED PRECEDING)"
+  },
+  {
+    "number": 5,
+    "alter": 2,
+    "heat": 3,
+    "sql": "SELECT RANK() OVER w1 AS 'rank', fieldA, fieldB FROM ( SELECT `col_bigint_undef_unsigned` AS fieldA, `col_char(20)_key_signed` AS fieldB FROM table_10_latin1_6 ORDER BY LOWER(fieldA), LOWER(fieldB) ) as t WINDOW w1 AS (PARTITION BY LOWER(fieldB) ORDER BY LOWER(fieldB) DESC , LOWER(fieldA) DESC RANGE CURRENT ROW)"
+  },
+  {
+    "number": 2,
+    "alter": 3,
+    "heat": 8,
+    "sql": "SELECT LAST_VALUE(fieldA)  OVER w1 AS 'last_value', fieldA, fieldB FROM ( SELECT `col_float_undef_signed` AS fieldA, `col_float_key_signed` AS fieldB FROM table_20_latin1_4 ORDER BY LOWER(fieldA), LOWER(fieldB) ) as t WINDOW w1 AS (PARTITION BY LOWER(fieldB) ORDER BY LOWER(fieldB) DESC , LOWER(fieldA) ASC RANGE UNBOUNDED PRECEDING)"
+  }
+]

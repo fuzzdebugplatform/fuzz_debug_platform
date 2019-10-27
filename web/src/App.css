@@ -1,0 +1,128 @@
+body {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  height: 40vmin;
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #09d3ac;
+  margin-left: 12px;
+  margin-right: 12px;
+}
+
+.SQLDebug {
+  margin: 16px;
+  /* max-width: 600px; */
+}
+
+.SQLDebug-header {
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+}
+
+.SQLDebug-header h1{
+  margin-right: 12px;
+}
+
+.SQLDebug-file {
+  margin-bottom: 20px;
+}
+
+.SQLDebug-block {
+  margin-bottom: 20px;
+}
+
+.SQLDebug-block > span {
+  font-style: italic;
+  line-height: 32px;
+}
+
+.SQLDebug-line {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+
+  border-bottom: 1px solid #ccc;
+}
+
+.SQLDebug-line > code {
+  margin-right: 16px;
+}
+
+.SQLDebug-line pre {
+  margin: 0;
+  display: flex;
+  align-items: center;
+}
+
+.SQLDebug-line pre code:last-child {
+  border-left: 1px solid #ccc;
+  border-right: 1px solid #ccc;
+  padding: 6px 4px;
+
+  transition: background-color 2s;
+}
+
+.SQLDebug-options {
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 8px;
+  margin-bottom: 8px;
+}
+
+.SQLDebug-options div {
+  display: flex;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.slider {
+  -webkit-appearance: none;
+  /* width: 100%; */
+  height: 15px;
+  background: linear-gradient(90deg, #56fe00, #ff0000);
+  outline: none;
+  opacity: 0.7;
+  -webkit-transition: .2s;
+  transition: opacity .2s;
+  border-radius: 20px;
+}
+
+.slider:hover {
+  opacity: 1;
+}
+
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 15px;
+  height: 15px;
+  border-radius: 20px;
+  background: blue;
+  cursor: pointer;
+}
+
+.slider::-moz-range-thumb {
+  width: 25px;
+  height: 25px;
+  background: #4CAF50;
+  cursor: pointer;
+}
