@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useMemo } from 'react'
-import { Link } from 'react-router-dom'
 import * as d3 from 'd3'
 
 const hueScale = d3
@@ -142,7 +141,7 @@ function SQLDebug2() {
       </div>
       <div className="SQLDebug-options">
         <div>
-          按 score 过滤：
+          按失败率过滤：
           <input
             className="slider"
             type="range"
@@ -154,7 +153,7 @@ function SQLDebug2() {
             }
             value={scoreThresh}
           />
-          &nbsp;&nbsp;{scoreThresh}
+          &nbsp;&nbsp;&gt;&nbsp;{scoreThresh}
         </div>
       </div>
       {codePos.map((file, fileIdx) => (
