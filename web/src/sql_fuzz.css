@@ -2,13 +2,11 @@ body {
     font-family: Arial, Helvetica, sans-serif;
 }
 .g6-tooltip {
+    padding: 10px 6px;
+    color: #444;
+    background-color: rgba(255,255,255,0.9);
     border: 1px solid #e2e2e2;
     border-radius: 4px;
-    font-size: 18px;
-    color: #545454;
-    background-color: rgba(255, 255, 255, 0.9);
-    padding: 14px;
-    box-shadow: rgb(174, 174, 174) 0px 0px 10px;
     max-width: 600px;
 }
 .g6-minimap {
@@ -27,5 +25,5 @@ body {
 }
 .SQLFuzz-header a {
     text-decoration: none;
-    color: #90d6ff;
+    color: black;
 }
