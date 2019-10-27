@@ -138,7 +138,6 @@ function SQLDebug2() {
     <div className="SQLDebug">
       <div className="SQLDebug-header">
         <h1>SQL Debug</h1>
-        <Link to="/">home</Link>
       </div>
       <div className="SQLDebug-options">
         <div>
