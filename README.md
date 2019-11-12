@@ -1,5 +1,6 @@
 # TiSqlDebug
 
+ - First, you should wrap the tidb version you are interesting with  [tidb-wrapper](https://github.com/fuzzdebugplatform/tidb-wrapper)
 
  - config tidb source dir in `config/config.go`(must consistent with wrapped tidb)
  
