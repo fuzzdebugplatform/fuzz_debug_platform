@@ -48,7 +48,7 @@ function SQLFuzz() {
           let node = {}
 
           node.id = `${item.number}`
-          node.description = 'label: ' + item.head
+          node.description = '<b>Label:</b> ' + item.head
           node.label = ellipseContent(item.head)
           node.shape = 'circle'
           node.x = x
@@ -63,7 +63,7 @@ function SQLFuzz() {
             for (let i = 0; i < item.alter.length; i++) {
               let subNode = {}
               subNode.id = `${node.id}_${i}`
-              subNode.description = 'label: ' + item.alter[i].content
+              subNode.description = '<b>Label:</b> ' + item.alter[i].content
               subNode.label = ellipseContent(item.alter[i].content)
               subNode.x = x
               subNode.y = y
@@ -92,7 +92,7 @@ function SQLFuzz() {
             const heatValue = heatValuesMap[node.id]
             return {
               ...node,
-              description: `${node.description}<br/>heat: ${heatValue.heat}`,
+              description: `${node.description}<br/><b>Heat: </b>${heatValue.heat}`,
               style: {
                 lineWidth: 2,
                 fill: colorScale(heatValue.heat)

@@ -37,7 +37,7 @@ body {
   justify-content: center;
 }
 
-.SQLDebug-header h1{
+.SQLDebug-header h1 {
   margin-right: 12px;
 }
 
@@ -91,7 +91,8 @@ body {
 .SQLDebug-options div {
   display: flex;
   align-items: center;
-  margin-bottom: 12px;
+  /* margin-bottom: 12px; */
+  height: 32px;
 }
 
 .slider {
