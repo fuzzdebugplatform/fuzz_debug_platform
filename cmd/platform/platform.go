@@ -28,7 +28,7 @@ var rootCmd = &cobra.Command{
 			return errors.New("yy are required")
 		}
 
-		if db == "" || dsn1 == "" || dsn2 == "" {
+		if dsn1 == "" || dsn2 == "" {
 			return errors.New("db dsn1 or dsn2 are all required")
 		}
 
@@ -58,7 +58,6 @@ var rootCmd = &cobra.Command{
 func init() {
 	rootCmd.Flags().StringVarP(&yyPath, "yy", "Y", "", "file path of randgen yy file")
 	rootCmd.Flags().IntVarP(&port, "port", "P", 43000, "the port to listen")
-	rootCmd.Flags().StringVar(&db, "db", "", "db to store platform meta info")
 	rootCmd.Flags().StringVar(&dsn1, "dsn1", "", "db to test")
 	rootCmd.Flags().StringVar(&dsn2, "dsn2", "", "standard db")
 	rootCmd.Flags().BoolVar(&debug, "debug", false, "open sql debug")

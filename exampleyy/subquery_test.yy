@@ -3,7 +3,7 @@
 */
 
 query:
-    BEGIN ; update ; ROLLBACK | select
+    BEGIN ; update ; ROLLBACK
 
 update:
     # update sub query
