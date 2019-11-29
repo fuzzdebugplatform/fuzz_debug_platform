@@ -54,8 +54,6 @@ function SQLFuzz() {
           node.x = x
           node.y = y
           data.nodes.push(node)
-          data.nodes.push(node)
-
           x = x + 100
           y = 50
 
