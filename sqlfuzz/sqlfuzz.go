@@ -12,6 +12,7 @@ import (
 	"sync"
 )
 
+// Succ Fail Counter
 type SFCounter struct {
 	Succ int
 	Fail int
@@ -69,7 +70,7 @@ func Fuzz(yy string, dsn1 string, dsn2 string, queries int, debug bool) {
 
 	log.Println("starting generate query")
 
-	sqlIter, err := grammar.NewIter(yy, "query", 500, keyf, false, false)
+	sqlIter, err := grammar.NewIter(yy, "query", 500, keyf, false)
 	if err != nil {
 		log.Fatalf("get iterator error %v\n", err)
 	}
