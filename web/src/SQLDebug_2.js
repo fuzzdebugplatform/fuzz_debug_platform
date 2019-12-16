@@ -141,7 +141,7 @@ function SQLDebug2() {
       </div>
       <div className="SQLDebug-options">
         <div>
-          按失败率过滤：
+          Filter by failure rate:&nbsp;&nbsp;
           <input
             className="slider"
             type="range"
@@ -164,7 +164,7 @@ function SQLDebug2() {
             className="SQLDebug-expand-icon"
             onClick={e => handleExpand(e, file.filePath)}
           >
-            {expands[file.filePath] === true ? ' 折叠' : ' 展开'}
+            {expands[file.filePath] === true ? ' Collapse' : ' Expand'}
           </a>
 
           {expands[file.filePath] === true &&
@@ -197,10 +197,10 @@ function SQLDebug2() {
                 )}
                 <div className="SQLDebug-tooltip">
                   <p>
-                    line {block.startLine} ~ {block.endLine}
+                    Line {block.startLine} ~ {block.endLine}
                   </p>
-                  <p>失败率: {block.score.toFixed(2)}</p>
-                  <p>失败次数: {block.count}</p>
+                  <p>Failure rate: {block.score.toFixed(2)}</p>
+                  <p>Failure count: {block.count}</p>
                 </div>
               </div>
             ))}
