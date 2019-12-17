@@ -1,12 +1,13 @@
 package sqlfuzz
 
 import (
+	"fuzz_debug_platform/config"
 	"github.com/pkg/errors"
 	"net/http"
 )
 
 func ToggleTiDB() error {
-	resp, err := http.Get("http://localhost:43222/switch")
+	resp, err := http.Get(config.GetGlobalConf().TiDBWrapperSwitchAddr)
 	if err != nil {
 		return err
 	}

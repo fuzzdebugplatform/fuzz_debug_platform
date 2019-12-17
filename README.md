@@ -25,17 +25,17 @@ tidb-bad-wrapper$ ./bin/tidb-server -path testdb
 tidb-good$ ./bin/tidb-server -P 4001 -path testdb
 ```
 
- - run test
- 
-```bash
-./bin/platform -Y exampleyy/subquery_test.yy --dsn1 "root:@tcp(127.0.0.1:4000)/randgen"  --dsn2 "root:@tcp(127.0.0.1:4001)/randgen" -Q 100 --debug
-```
-
- - run web
+ - build web page
 
 ```bash
 cd web
-yarn start
+yarn run build
 ```
 
-visit `localhost:3000`
+ - run test
+ 
+```bash
+./bin/platform -Y exampleyy/subquery_test.yy --dsn1 "root:@tcp(127.0.0.1:4000)/randgen"  --dsn2 "root:@tcp(127.0.0.1:4001)/randgen" -Q 100 --debug -W "web/build"
+```
+
+visit `localhost:3000` to see analysis.

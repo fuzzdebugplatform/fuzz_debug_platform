@@ -5,6 +5,7 @@ import (
 	"fuzz_debug_platform/config"
 	"github.com/pingcap/errors"
 	"io/ioutil"
+	"path/filepath"
 	"sort"
 	"sync"
 )
@@ -173,7 +174,7 @@ func Flush() {
 }
 
 func readSourceCode(filePath string) (string, error) {
-	data, err := ioutil.ReadFile(config.GetGlobalConf().TiDBSourceDir + filePath)
+	data, err := ioutil.ReadFile(filepath.Join(config.GetGlobalConf().TiDBSourceDir, filePath))
 	if err != nil {
 		return "", errors.Trace(err)
 	}

@@ -28,7 +28,8 @@ function SQLDebug2() {
 
   useEffect(() => {
     function fetchCodes() {
-      fetch('http://localhost:43000/codepos')
+      //fetch('http://localhost:43000/codepos')
+      fetch('/api/codepos')
         .then(res => res.json())
         .then(codePos => {
           console.log('原始：', codePos)

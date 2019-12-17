@@ -3,6 +3,7 @@ package main
 import (
 	"errors"
 	"fmt"
+	"fuzz_debug_platform/config"
 	"fuzz_debug_platform/sqlfuzz"
 	"fuzz_debug_platform/view"
 	"github.com/spf13/cobra"
@@ -19,6 +20,9 @@ var dsn1 string
 var dsn2 string
 var debug bool
 var queries int
+var webPath string
+var sourceDir string
+var traceServerAddr string
 
 var rootCmd = &cobra.Command{
 	Use:   "sql fuzz debug platform",
@@ -30,6 +34,19 @@ var rootCmd = &cobra.Command{
 
 		if dsn1 == "" || dsn2 == "" {
 			return errors.New("db dsn1 or dsn2 are all required")
+		}
+
+		if webPath == "" {
+			return errors.New("web path can not be empty")
+		}
+
+		if sourceDir != "" {
+			config.GetGlobalConf().TiDBSourceDir = sourceDir
+		}
+
+		if traceServerAddr != "" {
+			config.GetGlobalConf().TiDBTraceServerAddr = fmt.Sprintf("%s/trace/", traceServerAddr)
+			config.GetGlobalConf().TiDBWrapperSwitchAddr = fmt.Sprintf("%s/switch", traceServerAddr)
 		}
 
 		return nil
@@ -46,9 +63,12 @@ var rootCmd = &cobra.Command{
 			sqlfuzz.Fuzz(yyContent, dsn1, dsn2, queries, debug)
 		}()
 
-		httpHandle("/graph", view.Graph(yyContent))
-		httpHandle("/heat", view.Heat())
-		httpHandle("/codepos", view.CodePos())
+		httpHandle("/api/graph", view.Graph(yyContent))
+		httpHandle("/api/heat", view.Heat())
+		httpHandle("/api/codepos", view.CodePos())
+
+		resourceHandler := http.FileServer(http.Dir(webPath))
+		http.Handle("/", resourceHandler)
 
 		log.Printf("listen on :%d\n", port)
 		log.Fatalln(http.ListenAndServe(fmt.Sprintf(":%d", port), nil))
@@ -62,6 +82,9 @@ func init() {
 	rootCmd.Flags().StringVar(&dsn2, "dsn2", "", "standard db")
 	rootCmd.Flags().BoolVar(&debug, "debug", false, "open sql debug")
 	rootCmd.Flags().IntVarP(&queries, "queries", "Q", 1000, "queries to generate")
+	rootCmd.Flags().StringVarP(&webPath, "web", "W", "", "path of web page source")
+	rootCmd.Flags().StringVarP(&sourceDir, "source", "S", "", "path of tidb source code")
+	rootCmd.Flags().StringVarP(&traceServerAddr, "trace-server-addr", "T", "", "address of trace server")
 }
 
 func httpHandle(path string, handler http.HandlerFunc) {

@@ -20,8 +20,8 @@ function SQLFuzz() {
     }
 
     Promise.all([
-      fetchData('http://localhost:43000/graph'),
-      fetchData('http://localhost:43000/heat')
+      fetchData('/api/graph'),
+      fetchData('/api/heat')
       // fetchData('/graph_.json'),
       // fetchData('/heat_.json')
     ]).then(([graphs, heatsArr]) => {
