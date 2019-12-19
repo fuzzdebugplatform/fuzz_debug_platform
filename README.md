@@ -35,7 +35,12 @@ to see analysis（you can alse open this page in advance,
 ![quick experience](img/quick.gif)
 
 
+If you want to rerun it, please clear them first:
 
+```bash
+$ docker-compose stop
+$ docker-compose rm
+```
 
 ## Run with Binary
 
