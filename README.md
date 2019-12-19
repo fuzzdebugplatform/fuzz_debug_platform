@@ -29,8 +29,8 @@ $ docker logs docker-compose_pltform_1
 ```
 
 When you see "fuzz ok", you can open `localhost:43000`
-to see analysis（you can alse open this page advance, but you'd
- bettor flush the page after fuzz ok）:
+to see analysis（you can alse open this page in advance,
+ but you'd better flush the page after fuzz ok）:
  
 ![quick experience](img/quick.gif)
 
