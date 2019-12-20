@@ -17,7 +17,7 @@ Creating docker-compose_mysql_1   ... done
 The test above is about window functions, with yy 
 file [exampleyy/windows.yy](exampleyy/windows.yy).
 
-You can use `docker logs` to see test process:
+You can use `docker logs -f` to see test process:
 
 ```bash
 $ docker logs docker-compose_pltform_1
