@@ -68,7 +68,9 @@ func Trace(info *SQLTraceInfo) error {
 				}
 			}
 			counters[uid].Count()
-			//counters[uid].SQLs = append(counters[uid].SQLs, info.Sql)
+			if info.IsBug {
+				counters[uid].SQLs = append(counters[uid].SQLs, info.Sql)
+			}
 		}
 	}
 

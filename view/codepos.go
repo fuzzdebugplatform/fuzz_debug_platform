@@ -8,7 +8,6 @@ import (
 
 func CodePos() http.HandlerFunc {
 	return func(writer http.ResponseWriter, request *http.Request) {
-		writer.Header().Set("Content-Type", "application/json")
 		codePos, _ := sqldebug.Summarize()
 		json.NewEncoder(writer).Encode(codePos)
 	}
