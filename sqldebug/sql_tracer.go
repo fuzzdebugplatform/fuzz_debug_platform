@@ -17,12 +17,16 @@ type CodeBlock struct {
 	EndLine   int64    `json:"endLine"`
 	Score     float64  `json:"score"`
 	Count     int      `json:"count"`
-	SQLs      []string `json:"sqls"`
+	SQLs      []*string `json:"-"`
 }
 
 // String generates unique id of a codeBlock
 func (codeBlock *CodeBlock) String() string {
-	return fmt.Sprintf("%s:%d-%d", codeBlock.FilePath, codeBlock.StartLine, codeBlock.EndLine)
+	return formatCodeBlockUid(codeBlock.FilePath, codeBlock.StartLine, codeBlock.EndLine)
+}
+
+func formatCodeBlockUid(filepath string, startLine, endLine int64) string {
+	return fmt.Sprintf("%s:%d-%d", filepath, startLine, endLine)
 }
 
 // CodeBlockCounter counters frequency of a codeBlock
@@ -37,7 +41,7 @@ func (counter *CodeBlockCounter) Count() {
 
 // SQLTracer records normal path counter and bug path counter
 type SQLTracer struct {
-	sync.Mutex
+	sync.RWMutex
 	NormalPathCounters map[string]*CodeBlockCounter
 	BugPathCounters    map[string]*CodeBlockCounter
 }
@@ -58,7 +62,7 @@ func Trace(info *SQLTraceInfo) error {
 				FilePath:  filePath,
 				StartLine: block[0],
 				EndLine:   block[1],
-				SQLs:      []string{},
+				SQLs:      []*string{},
 			}
 			uid := codeBlock.String()
 			if _, prs := counters[uid]; !prs {
@@ -69,7 +73,7 @@ func Trace(info *SQLTraceInfo) error {
 			}
 			counters[uid].Count()
 			if info.IsBug {
-				counters[uid].SQLs = append(counters[uid].SQLs, info.Sql)
+				counters[uid].SQLs = append(counters[uid].SQLs, &info.Sql)
 			}
 		}
 	}
@@ -116,8 +120,8 @@ func (c CodePos) Less(i, j int) bool {
 }
 
 func Summarize() (CodePos, error) {
-	sqlTracer.Lock()
-	defer sqlTracer.Unlock()
+	sqlTracer.RLock()
+	defer sqlTracer.RUnlock()
 
 	codeMap := make(map[string]*CodeBlockPos)
 	var result CodePos
@@ -204,4 +208,21 @@ func init() {
 		NormalPathCounters: make(map[string]*CodeBlockCounter),
 		BugPathCounters:    make(map[string]*CodeBlockCounter),
 	}
+}
+
+func BugSqls(filepath string, startLine, endLine int64) []string {
+	sqlTracer.RLock()
+	defer sqlTracer.RUnlock()
+
+	counter, ok := sqlTracer.BugPathCounters[formatCodeBlockUid(filepath, startLine, endLine)]
+	if !ok {
+		return nil
+	}
+
+	sqlStrs := make([]string, 0, len(counter.SQLs))
+	for _, strPoint := range counter.SQLs {
+		sqlStrs = append(sqlStrs, *strPoint)
+	}
+
+	return sqlStrs
 }

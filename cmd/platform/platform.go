@@ -66,6 +66,7 @@ var rootCmd = &cobra.Command{
 		httpHandle("/api/graph", view.Graph(yyContent))
 		httpHandle("/api/heat", view.Heat())
 		httpHandle("/api/codepos", view.CodePos())
+		httpHandle("/api/bugsqls", view.BugSqls())
 
 		resourceHandler := http.FileServer(http.Dir(webPath))
 		http.Handle("/", resourceHandler)
