@@ -161,17 +161,23 @@ function SQLDebug() {
     const sqls = failureSQLs[codeBlockKey]
     if (sqls !== undefined) {
       return (
-        <ul>
-          {sqls.map(sql => (
-            <li key={sql}>{sql}</li>
-          ))}
-        </ul>
+        <p>
+          Failure SQLs ({sqls.length}):
+          <ul>
+            {sqls.map(sql => (
+              <li key={sql}>{sql}</li>
+            ))}
+          </ul>
+        </p>
       )
     } else {
       return (
-        <a href="/" onClick={e => loadFailureSQLs(e, codeBlock)}>
-          Load
-        </a>
+        <p>
+          Failure SQLs:&nbsp;&nbsp;
+          <a href="/" onClick={e => loadFailureSQLs(e, codeBlock)}>
+            Load
+          </a>
+        </p>
       )
     }
   }
@@ -244,7 +250,6 @@ function SQLDebug() {
                   <p>Failure rate: {block.score.toFixed(2)}</p>
                   <p>Failure count: {block.count}</p>
                   <hr />
-                  <p>Failure SQLs:</p>
                   {renderFailureSQLs(block)}
                 </div>
               </div>

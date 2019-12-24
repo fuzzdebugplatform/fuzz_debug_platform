@@ -131,14 +131,20 @@ body {
 .SQLDebug-tooltip {
   visibility: hidden;
   position: absolute;
-  background-color: rgba(255, 255, 255, 0.9);
+  background-color: rgba(255, 255, 255, 0.95);
   top: 20px;
-  /* bottom: 100%; */
   left: 30px;
   padding: 16px;
   border-radius: 8px;
   z-index: 1;
   box-shadow: 0 21px 52px rgba(0, 0, 0, 0.4);
+  max-width: 400px;
+  max-height: 400px;
+  overflow-y: scroll;
+}
+
+.SQLDebug-tooltip li {
+  margin-top: 6px;
 }
 
 .SQLDebug-block:hover .SQLDebug-tooltip {
