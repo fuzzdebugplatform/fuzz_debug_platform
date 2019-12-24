@@ -13,6 +13,7 @@ function SQLDebug() {
   const [codePos, setCodePos] = useState([])
   const [scoreThresh, setScoreThresh] = useState(0.6)
   const [expands, setExpands] = useState({})
+  const [failureSQLs, setFailureSQLs] = useState({})
 
   const brighterScale = useMemo(() => {
     const countArr = codePos
@@ -137,6 +138,44 @@ function SQLDebug() {
     }))
   }
 
+  function loadFailureSQLs(e, codeBlock) {
+    e.preventDefault()
+    fetch(
+      `/api/bugsqls?filepath=${encodeURIComponent(
+        codeBlock.filePath
+      )}&startLine=${codeBlock.startLine}&endLine=${codeBlock.endLine}`
+    )
+      .then(res => res.json())
+      .then(sqls => {
+        const codeBlockKey = `${codeBlock.filePath}_${codeBlock.startLine}_${codeBlock.endLine}`
+        setFailureSQLs(prev => ({
+          ...prev,
+          [codeBlockKey]: sqls
+        }))
+      })
+      .catch(err => console.log(err))
+  }
+
+  function renderFailureSQLs(codeBlock) {
+    const codeBlockKey = `${codeBlock.filePath}_${codeBlock.startLine}_${codeBlock.endLine}`
+    const sqls = failureSQLs[codeBlockKey]
+    if (sqls !== undefined) {
+      return (
+        <ul>
+          {sqls.map(sql => (
+            <li key={sql}>{sql}</li>
+          ))}
+        </ul>
+      )
+    } else {
+      return (
+        <a href="/" onClick={e => loadFailureSQLs(e, codeBlock)}>
+          Load
+        </a>
+      )
+    }
+  }
+
   return (
     <div className="SQLDebug">
       <div className="SQLDebug-header">
@@ -204,6 +243,9 @@ function SQLDebug() {
                   </p>
                   <p>Failure rate: {block.score.toFixed(2)}</p>
                   <p>Failure count: {block.count}</p>
+                  <hr />
+                  <p>Failure SQLs:</p>
+                  {renderFailureSQLs(block)}
                 </div>
               </div>
             ))}
