@@ -9,7 +9,7 @@ const hueScale = d3
 const range = (start, stop, step = 1) =>
   Array.from({ length: (stop - start) / step + 1 }, (_, i) => start + i * step)
 
-function SQLDebug2() {
+function SQLDebug() {
   const [codePos, setCodePos] = useState([])
   const [scoreThresh, setScoreThresh] = useState(0.6)
   const [expands, setExpands] = useState({})
@@ -211,4 +211,4 @@ function SQLDebug2() {
   )
 }
 
-export default SQLDebug2
+export default SQLDebug
