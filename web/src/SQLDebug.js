@@ -1,133 +1,263 @@
 import React, { useState, useEffect, useMemo } from 'react'
-import { Link } from 'react-router-dom'
 import * as d3 from 'd3'
 
-function SQLDebug() {
-  const [orderBy, setOrderBy] = useState('score')
-  const [scoreThresh, setScoreThresh] = useState(0.7)
+const hueScale = d3
+  .scaleLinear()
+  .domain([0, 1.0])
+  .range([100, 0])
 
-  const [codeblocks, setCodeblocks] = useState([])
+const range = (start, stop, step = 1) =>
+  Array.from({ length: (stop - start) / step + 1 }, (_, i) => start + i * step)
+
+function SQLDebug() {
+  const [codePos, setCodePos] = useState([])
+  const [scoreThresh, setScoreThresh] = useState(0.6)
+  const [expands, setExpands] = useState({})
+  const [failureSQLs, setFailureSQLs] = useState({})
+
   const brighterScale = useMemo(() => {
-    const countArr = codeblocks.map(block => block.count)
-    const minCount = d3.min(countArr) || 1
-    const maxCount = d3.max(countArr) || 100
-    // return d3.scaleSequential(d3.interpolateOrRd).domain([minCount, maxCount])
+    const countArr = codePos
+      .map(file => file.codeBlocks.map(block => block.count))
+      .flat()
+    const min = d3.min(countArr)
+    const max = d3.max(countArr)
     return d3
-        .scaleLinear()
-        .domain([minCount, maxCount])
-        .range([0.7 * 100, 0.3 * 100])
-  }, [codeblocks])
-  const hueScale = useMemo(() => {
-    const scoreArr = codeblocks.map(block => block.score)
-    const minScore = d3.min(scoreArr) || 0
-    const maxScore = d3.max(scoreArr) || 1
-    return d3
-        .scaleLinear()
-        .domain([0.0, 1.0])
-        .range([100, 0])
-  }, [codeblocks])
+      .scaleLinear()
+      .domain([min, max])
+      .range([0.7 * 100, 0.3 * 100])
+  }, [codePos])
 
   useEffect(() => {
-    let timer
-    function fetchBlocks() {
-      fetch('./code_block.json')
-      fetch('http://localhost:43000/codepos')
-          .then(res => res.json())
-          .then(data => {
-            console.log(data)
-            // data.sort((a, b) => (a.score < b.score ? 1 : -1))
-            data = data.filter(item => item.score >= scoreThresh)
-            data.sort((a, b) => {
-              if (orderBy === 'score') {
-                return a.score < b.score ? 1 : -1
-              } else {
-                return a.count < b.count ? 1 : -1
+    function fetchCodes() {
+      //fetch('http://localhost:43000/codepos')
+      fetch('/api/codepos')
+        .then(res => res.json())
+        .then(codePos => {
+          console.log('原始：', codePos)
+          // 合并重合 block
+          for (let i = 0; i < codePos.length; i++) {
+            const file = codePos[i]
+            for (let i = file.codeBlocks.length - 1; i > 0; i--) {
+              const curBlock = file.codeBlocks[i]
+              const preBlock = file.codeBlocks[i - 1]
+              if (
+                curBlock.startLine <= preBlock.endLine &&
+                curBlock.score === preBlock.score &&
+                curBlock.count === preBlock.count
+              ) {
+                preBlock.endLine = curBlock.endLine
+                curBlock.score = 0.0
+              }
+            }
+          }
+          console.log('合并后：', codePos)
+          codePos = codePos
+            .map(file => {
+              return {
+                filePath: file.filePath,
+                codeBlocks: file.codeBlocks.filter(
+                  block => block.score >= scoreThresh
+                ),
+                lines: file.content.split('\n')
               }
             })
-            console.log('sorted:', data)
-            setCodeblocks(data)
-          })
+            .filter(file => file.codeBlocks.length > 0)
+          console.log('过滤后：', codePos)
+          setCodePos(codePos)
+        })
     }
-    fetchBlocks()
-    timer = setInterval(fetchBlocks, 5 * 1000)
-    //timer = setInterval(fetchBlocks, 5 * 1000)
-    return () => clearInterval(timer)
-  }, [orderBy, scoreThresh])
+    fetchCodes()
+  }, [scoreThresh])
+
+  function renderLine(file, blockIdx, lineNum, highlight = true) {
+    lineNum = lineNum - 1 // lineNum in file start from 1, not 0, so we need to substract 1
+    const block = file.codeBlocks[blockIdx]
+    if (lineNum < 0 || lineNum >= file.lines.length) {
+      return null
+    }
+    return (
+      <div key={`${blockIdx}_${lineNum}`} className="SQLDebug-line">
+        <code>{lineNum + 1}:</code>
+        <pre>
+          <code>
+            {file.lines[lineNum].slice(
+              0,
+              file.lines[lineNum].length -
+                file.lines[lineNum].trimStart().length
+            )}
+          </code>
+          <code
+            style={
+              highlight
+                ? {
+                    backgroundColor: `hsl(${hueScale(
+                      block.score
+                    )}, 100%, ${brighterScale(block.count)}%)`
+                  }
+                : {}
+            }
+          >
+            {file.lines[lineNum].trimStart()}
+          </code>
+        </pre>
+      </div>
+    )
+  }
+
+  function genPrefixExtendRange(file, blockIdx) {
+    const block = file.codeBlocks[blockIdx]
+    if (blockIdx === 0) {
+      return range(block.startLine - 2, block.startLine - 1)
+    }
+    const preBlock = file.codeBlocks[blockIdx - 1]
+    if (block.startLine - preBlock.endLine <= 1) {
+      return [-1]
+    }
+    const start = d3.max([block.startLine - 2, preBlock.endLine])
+    return range(start, block.startLine - 1)
+  }
+
+  function genSuffixExtendRange(file, blockIdx) {
+    const block = file.codeBlocks[blockIdx]
+    if (blockIdx === file.codeBlocks.length - 1) {
+      return range(block.endLine + 1, block.endLine + 2)
+    }
+    const nextBlock = file.codeBlocks[blockIdx + 1]
+    if (nextBlock.startLine - block.endLine <= 1 + 2) {
+      return [-1]
+    }
+    const end = d3.min([block.endLine + 2, nextBlock.startLine - 2])
+    return range(block.endLine + 1, end)
+  }
+
+  function handleExpand(e, filePath) {
+    e.preventDefault()
+    setExpands(prevState => ({
+      ...prevState,
+      [filePath]: !!!prevState[filePath]
+    }))
+  }
+
+  function loadFailureSQLs(e, codeBlock) {
+    e.preventDefault()
+    fetch(
+      `/api/bugsqls?filepath=${encodeURIComponent(
+        codeBlock.filePath
+      )}&startLine=${codeBlock.startLine}&endLine=${codeBlock.endLine}`
+    )
+      .then(res => res.json())
+      .then(sqls => {
+        const codeBlockKey = `${codeBlock.filePath}_${codeBlock.startLine}_${codeBlock.endLine}`
+        setFailureSQLs(prev => ({
+          ...prev,
+          [codeBlockKey]: sqls
+        }))
+      })
+      .catch(err => console.log(err))
+  }
+
+  function renderFailureSQLs(codeBlock) {
+    const codeBlockKey = `${codeBlock.filePath}_${codeBlock.startLine}_${codeBlock.endLine}`
+    const sqls = failureSQLs[codeBlockKey]
+    if (sqls !== undefined) {
+      return (
+        <p>
+          Failure SQLs ({sqls.length}):
+          <ul>
+            {sqls.map(sql => (
+              <li key={sql}>{sql}</li>
+            ))}
+          </ul>
+        </p>
+      )
+    } else {
+      return (
+        <p>
+          Failure SQLs:&nbsp;&nbsp;
+          <a href="/" onClick={e => loadFailureSQLs(e, codeBlock)}>
+            Load
+          </a>
+        </p>
+      )
+    }
+  }
 
   return (
-      <div className="SQLDebug">
-        <div className="SQLDebug-header">
-          <h1>SQL Debug</h1>
-          <Link to="/">home</Link>
-        </div>
-        <div className="SQLDebug-options">
-          <div>
-            排序：
-            <input
-                type="radio"
-                name="order"
-                value="score"
-                checked={orderBy === 'score'}
-                onChange={() => setOrderBy('score')}
-            ></input>
-            失败率
-            <input
-                type="radio"
-                name="order"
-                value="failed_count"
-                checked={orderBy === 'failed_count'}
-                onChange={() => setOrderBy('failed_count')}
-            ></input>
-            失败次数
-          </div>
-          <div>
-            按 score 过滤：
-            <input
-                className="slider"
-                type="range"
-                min={0}
-                max={1.0}
-                step={0.1}
-                onChange={e => setScoreThresh(e.target.value)}
-                value={scoreThresh}
-            />
-            &nbsp;&nbsp;{scoreThresh}
-          </div>
-        </div>
-        {codeblocks.map((block, _blockIdx) => (
-            <div
-                key={`${block.filePath}_${block.score}_${block.count}`}
-                key={`${block.filePath}_${block.score}_${block.count}_${_blockIdx}`}
-                className="SQLDebug-block"
-            >
-          <span>
-            {block.filePath}: (score: {block.score}, failed count:
-            {block.count})
-          </span>
-              {block.codeBlock.content.split('\n').map((line, lineIdx) => (
-                  <div key={lineIdx + ''} className="SQLDebug-line">
-                    <code>{block.codeBlock.startLine + lineIdx}:</code>
-                    <pre>
-                <code>
-                  {line.slice(0, line.length - line.trimStart().length)}
-                </code>
-                <code
-                    style={{
-                      backgroundColor: `hsl(${hueScale(
-                          block.score
-                      )}, 100%, ${brighterScale(block.count)}%)`
-                    }}
-                >
-                  {line.trimStart()}
-                </code>
-              </pre>
-                  </div>
-              ))}
-            </div>
-        ))}
+    <div className="SQLDebug">
+      <div className="SQLDebug-header">
+        <h1>SQL Debug</h1>
       </div>
+      <div className="SQLDebug-options">
+        <div>
+          Filter by failure rate:&nbsp;&nbsp;
+          <input
+            className="slider"
+            type="range"
+            min={0}
+            max={1.0}
+            step={0.1}
+            onChange={e =>
+              setScoreThresh(e.target.value < 0.6 ? 0.6 : e.target.value)
+            }
+            value={scoreThresh}
+          />
+          &nbsp;&nbsp;&gt;=&nbsp;{scoreThresh}
+        </div>
+      </div>
+      {codePos.map(file => (
+        <div className="SQLDebug-file" key={file.filePath}>
+          <span>{file.filePath}</span>
+          <a
+            href="/"
+            className="SQLDebug-expand-icon"
+            onClick={e => handleExpand(e, file.filePath)}
+          >
+            {expands[file.filePath] === true ? ' Collapse' : ' Expand'}
+          </a>
+
+          {expands[file.filePath] === true &&
+            file.codeBlocks.map((block, blockIdx) => (
+              <div
+                className="SQLDebug-block"
+                key={`${file.filePath}_${blockIdx}`}
+              >
+                {blockIdx > 0 &&
+                  block.startLine - file.codeBlocks[blockIdx - 1].endLine >
+                    4 && (
+                    <div className="SQLDebug-line">
+                      <code>
+                        {file.codeBlocks[blockIdx - 1].endLine + 3}...
+                        {block.startLine - 3}
+                      </code>
+                    </div>
+                  )}
+                {/* 前面扩展两行，第一个 block 始终扩展，其余看情况 */}
+                {genPrefixExtendRange(file, blockIdx).map(lineNum =>
+                  renderLine(file, blockIdx, lineNum, false)
+                )}
+                {/* 高亮内容 */}
+                {range(block.startLine, block.endLine).map(lineNum =>
+                  renderLine(file, blockIdx, lineNum)
+                )}
+                {/* 后面扩展两行 */}
+                {genSuffixExtendRange(file, blockIdx).map(lineNum =>
+                  renderLine(file, blockIdx, lineNum, false)
+                )}
+                <div className="SQLDebug-tooltip">
+                  <p>
+                    Line {block.startLine} ~ {block.endLine}
+                  </p>
+                  <p>Failure rate: {block.score.toFixed(2)}</p>
+                  <p>Failure count: {block.count}</p>
+                  <hr />
+                  {renderFailureSQLs(block)}
+                </div>
+              </div>
+            ))}
+        </div>
+      ))}
+    </div>
   )
 }
 
 export default SQLDebug
-

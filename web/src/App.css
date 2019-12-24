@@ -102,8 +102,8 @@ body {
   background: linear-gradient(90deg, #56fe00, #ff0000);
   outline: none;
   opacity: 0.7;
-  -webkit-transition: .2s;
-  transition: opacity .2s;
+  -webkit-transition: 0.2s;
+  transition: opacity 0.2s;
   border-radius: 20px;
 }
 
@@ -124,24 +124,31 @@ body {
 .slider::-moz-range-thumb {
   width: 25px;
   height: 25px;
-  background: #4CAF50;
+  background: #4caf50;
   cursor: pointer;
 }
 
 .SQLDebug-tooltip {
   visibility: hidden;
   position: absolute;
-  background-color:#ccc;
+  background-color: rgba(255, 255, 255, 0.95);
   top: 20px;
   left: 30px;
-  border: 1px solid #eee;
-  padding: 10px;
+  padding: 16px;
   border-radius: 8px;
   z-index: 1;
+  box-shadow: 0 21px 52px rgba(0, 0, 0, 0.4);
+  max-width: 400px;
+  max-height: 400px;
+  overflow-y: scroll;
+}
+
+.SQLDebug-tooltip li {
+  margin-top: 6px;
 }
 
 .SQLDebug-block:hover .SQLDebug-tooltip {
-  visibility:visible;
+  visibility: visible;
 }
 
 a.SQLDebug-expand-icon {

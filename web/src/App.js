@@ -6,11 +6,11 @@ import { BrowserRouter as Router, Link, Switch, Route } from 'react-router-dom'
 import Home from './Home'
 import 'antd/dist/antd.css'
 import SQLFuzz from './SQLFuzz'
-import SQLDebug2 from './SQLDebug_2'
+import SQLDebug from './SQLDebug'
 
 function App() {
-  let pathname = window.location.pathname.slice(1);
-  if(pathname === '') {
+  let pathname = window.location.pathname.slice(1)
+  if (pathname === '') {
     pathname = 'home'
   }
   const [curKey, setCurKey] = useState(pathname)
@@ -28,8 +28,8 @@ function App() {
           <Link to="/sqlfuzz">SQL_FUZZ</Link>
         </Menu.Item>
 
-        <Menu.Item key="sqldebug_2">
-          <Link to="/sqldebug_2">SQL_DEBUG</Link>
+        <Menu.Item key="sqldebug">
+          <Link to="/sqldebug">SQL_DEBUG</Link>
         </Menu.Item>
       </Menu>
 
@@ -40,8 +40,8 @@ function App() {
         <Route path="/sqlfuzz">
           <SQLFuzz />
         </Route>
-        <Route path="/sqldebug_2">
-          <SQLDebug2 />
+        <Route path="/sqldebug">
+          <SQLDebug />
         </Route>
       </Switch>
     </Router>
