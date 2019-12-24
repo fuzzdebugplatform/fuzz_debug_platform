@@ -50,15 +50,17 @@ function SQLDebug() {
             }
           }
           console.log('合并后：', codePos)
-          codePos = codePos.map(file => {
-            return {
-              filePath: file.filePath,
-              codeBlocks: file.codeBlocks.filter(
-                block => block.score >= scoreThresh
-              ),
-              lines: file.content.split('\n')
-            }
-          })
+          codePos = codePos
+            .map(file => {
+              return {
+                filePath: file.filePath,
+                codeBlocks: file.codeBlocks.filter(
+                  block => block.score >= scoreThresh
+                ),
+                lines: file.content.split('\n')
+              }
+            })
+            .filter(file => file.codeBlocks.length > 0)
           console.log('过滤后：', codePos)
           setCodePos(codePos)
         })
@@ -154,10 +156,10 @@ function SQLDebug() {
             }
             value={scoreThresh}
           />
-          &nbsp;&nbsp;&gt;&nbsp;{scoreThresh}
+          &nbsp;&nbsp;&gt;=&nbsp;{scoreThresh}
         </div>
       </div>
-      {codePos.map((file, fileIdx) => (
+      {codePos.map(file => (
         <div className="SQLDebug-file" key={file.filePath}>
           <span>{file.filePath}</span>
           <a
