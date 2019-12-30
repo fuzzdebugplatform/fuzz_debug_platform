@@ -76,7 +76,7 @@ func Fuzz(yy string, dsn1 string, dsn2 string, queries int, debug bool) {
 	}
 
 	err = sqlIter.Visit(sql_generator.FixedTimesVisitor(func(_ int, sql string) {
-		consistent, _, _ := compare.BySql(sql, db1, db2, false)
+		consistent, _, _ := compare.BySql(sql, db1, db2, true)
 		if debug {
 			sqldebug.Notify(digest(sql), !consistent)
 		}
