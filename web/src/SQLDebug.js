@@ -39,7 +39,11 @@ function SQLDebug() {
             const file = codePos[i]
             for (let i = file.codeBlocks.length - 1; i > 0; i--) {
               const curBlock = file.codeBlocks[i]
+              if (i === file.codeBlocks.length - 1) {
+                curBlock.oriEndLine = curBlock.endLine
+              }
               const preBlock = file.codeBlocks[i - 1]
+              preBlock.oriEndLine = preBlock.endLine
               if (
                 curBlock.startLine <= preBlock.endLine &&
                 curBlock.score === preBlock.score &&
@@ -143,7 +147,7 @@ function SQLDebug() {
     fetch(
       `/api/bugsqls?filepath=${encodeURIComponent(
         codeBlock.filePath
-      )}&startLine=${codeBlock.startLine}&endLine=${codeBlock.endLine}`
+      )}&startLine=${codeBlock.startLine}&endLine=${codeBlock.oriEndLine}`
     )
       .then(res => res.json())
       .then(sqls => {
@@ -161,23 +165,23 @@ function SQLDebug() {
     const sqls = failureSQLs[codeBlockKey]
     if (sqls !== undefined) {
       return (
-        <p>
+        <div>
           Failure SQLs ({sqls.length}):
           <ul>
             {sqls.map(sql => (
               <li key={sql}>{sql}</li>
             ))}
           </ul>
-        </p>
+        </div>
       )
     } else {
       return (
-        <p>
+        <div>
           Failure SQLs:&nbsp;&nbsp;
           <a href="/" onClick={e => loadFailureSQLs(e, codeBlock)}>
             Load
           </a>
-        </p>
+        </div>
       )
     }
   }
